@@ -18,5 +18,5 @@
     #   ansible.builtin.debug:
     #     msg: "value of cliurl is {{CLIURL}}"
       
-### task level variables will have higher precendence thatn play-level variables 
+### task level variables will have higher precendence than play-level variables 
 # cli variable > task variable > play variable 

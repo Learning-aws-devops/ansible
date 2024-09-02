@@ -1,0 +1,7 @@
+- name: Demo on facts 
+  hosts: all 
+  gather_facts: false                # By default, this value is true
+  tasks:
+    - name: Pritning a fact  
+      ansible.builtin.debug:
+        msg: "CPU Architectire is {{ansible_architecture}}"

@@ -121,7 +121,7 @@ Another way of representing list:
 A fact is nothing but a system property that would gathered  by ansible during every-run.
 
 ```
-    ansible -i inv frontend  -e ansible_user=ec2-user -e ansible_password=DevOps321 -m ansible.builtin.gather_facts
+    ansible -i inv all -e ansible_user=ec2-user -e ansible_password=DevOps321 -m ansible.builtin.gather_facts
 ```
 
 # Ansible is very rich with collections.
