@@ -9,13 +9,3 @@
       ansible.builtin.debug:
         msg: "Ola from task2 of play1"
 
-- name: play2
-  hosts: frontend 
-  tasks:
-    - name: Task1 of play1 
-      ansible.builtin.debug:
-        msg: "Olympics"
-
-    - name: Task2 of play2 
-      ansible.builtin.debug:
-        msg: "2024 - France"
