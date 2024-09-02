@@ -1,0 +1,11 @@
+- name: Demo on using shell module 
+  hosts: all 
+  gather_facts: false                # By default, this value is true
+  tasks:
+    - name: Pritning a fact  
+      ansible.builtin.shell: uptime 
+      register: OUT
+
+    - name: Pritning output
+      ansible.builtin.debug:
+        msg: "{{OUT.stdout}}"

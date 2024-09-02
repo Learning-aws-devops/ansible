@@ -1,0 +1,11 @@
+- name: Demo on errors
+  hosts: all 
+  gather_facts: false
+  tasks:
+    - name: Check if java process is running or not
+      ansible.builtin.shell: ps -ef |grep java |grep -v grep
+      ignore_errors: True
+      
+    - name: Printing a msg 
+      ansible.builtin.debug:
+        msg: "This is a second task" 

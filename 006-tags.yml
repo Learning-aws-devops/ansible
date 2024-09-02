@@ -1,0 +1,33 @@
+- name: Demo on tashs
+  hosts: all 
+  gather_facts: false
+  tasks:
+    - name: Installing frontend
+      ansible.builtin.debug:
+        msg: Installing frontend
+      tags: frontend
+
+    - name: starting frontend
+      ansible.builtin.debug:
+        msg: starting frontend
+      tags: frontend
+
+    - name: Installing backend
+      ansible.builtin.debug:
+        msg: Installing backend
+      tags: backend
+
+    - name: starting backend
+      ansible.builtin.debug:
+        msg: starting backend
+      tags: backend
+
+    - name: Installing mysql
+      ansible.builtin.debug:
+        msg: Installing mysql
+      tags: mysql
+
+    - name: starting mysql
+      ansible.builtin.debug:
+        msg: starting mysql
+      tags: mysql

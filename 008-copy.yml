@@ -1,0 +1,8 @@
+- name: Demo on copy 
+  hosts: all 
+  gather_facts: false                # By default, this value is true
+  tasks:
+    - name: Copying the file to destination
+      ansible.builtin.copy:
+        src: proxy.conf 
+        dest: /home/ec2-user/expense.conf
