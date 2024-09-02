@@ -1,0 +1,22 @@
+# In ansible, if you try to access /print a variable that's not delcared, ansible is going to throw an error
+- name: Demo vars 
+  hosts: all 
+  vars:                                     # Play-level variables, this can be accessed by all the task of a play 
+    URL: play.google.com         
+  tasks:
+    - name: Pritning variable 
+      ansible.builtin.debug:
+        msg: "value of url is {{URL}}"
+
+    - name: Pritning variable from task2
+      ansible.builtin.debug:
+        msg: "value of url is {{URL}}" 
+      vars:                                 # task-level variables, this can be accessed by this particular task
+        URL: task.google.com
+
+    # - name: Pritning CLIURL 
+    #   ansible.builtin.debug:
+    #     msg: "value of cliurl is {{CLIURL}}"
+      
+### task level variables will have higher precendence thatn play-level variables 
+# cli variable > task variable > play variable 

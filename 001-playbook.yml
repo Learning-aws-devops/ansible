@@ -12,7 +12,7 @@
 - name: play2
   hosts: frontend 
   tasks:
-    - name: Task1 of play1 
+    - name: Task1 of play2 
       ansible.builtin.debug:
         msg: "Olympics"
 
