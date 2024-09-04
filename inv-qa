@@ -1,0 +1,8 @@
+[frontend]
+frontend-qa.expense.internal
+
+[mysql]
+mysql-qa.expense.internal
+
+[backend]
+backend-qa.expense.internal

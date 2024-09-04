@@ -1,0 +1,57 @@
+- name: Disabling Nodejs                                    # For disabling and enabling nodejs, we didn't find the relevant ansible module
+  ansible.builtin.shell: dnf module disable nodejs -y 
+
+- name: Enabling Nodejs                                    # For disabling and enabling nodejs, we didn't find the relevant ansible module
+  ansible.builtin.shell: dnf module enable nodejs:20 -y 
+
+- name: Installing nodejs 
+  ansible.builtin.dnf:
+    name: nodejs 
+    state: present 
+
+- name: Adding app user expense 
+  ansible.builtin.user:
+    name: expense
+    comment: Application User 
+
+- name: App Prequisite Tasks
+  ansible.builtin.include_role:      # Through this we can all a specific task from a role
+    name: common                     # Name of the role to be called 
+    tasks_from: pre-req              # Name of the task in the above mentioned role 
+
+- name: Generating node_modules
+  community.general.npm:
+    path: "{{APP_PATH}}"
+
+- name: Install MySQL Client
+  ansible.builtin.dnf:
+    name: mysql
+    state: installed
+
+- name: Install Prereq packages for mysql_db
+  ansible.builtin.pip:
+    name:
+      - PyMySQL
+      - cryptography                            # Dependency packages for community.mysql.mysql_db:   
+    executable: pip3.11
+
+- name: Load Schema
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /app/schema/backend.sql
+    login_user: root
+    login_password: "{{PWD}}"
+    login_host: "mysql-{{ENV}}.expense.internal"
+
+- name: Copying Systemd file 
+  ansible.builtin.template:
+    src: systemd.service
+    dest: /etc/systemd/system/{{COMPONENT}}.service
+
+- name: Restarting {{COMPONENT}} on {{ENV}}
+  ansible.builtin.systemd_service:
+    name: "{{COMPONENT}}" 
+    state: restarted
+    enabled: true
+    daemon_reload: true

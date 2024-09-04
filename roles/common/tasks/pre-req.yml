@@ -1,0 +1,15 @@
+- name: Cleanup Of Old App Directory
+  ansible.builtin.file:
+    path: "{{APP_PATH}}"
+    state: absent
+
+- name: Creating App Directory
+  ansible.builtin.file:
+    path: "{{APP_PATH}}"
+    state: directory
+
+- name: Download & Extracting {{COMPONENT}}
+  ansible.builtin.unarchive:
+    src: https://expense-web-app.s3.amazonaws.com/{{COMPONENT}}.zip
+    dest: "{{APP_PATH}}"
+    remote_src: yes    

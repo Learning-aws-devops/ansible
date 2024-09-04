@@ -1,0 +1,21 @@
+- name: Install nginx
+  ansible.builtin.package:
+    name: nginx
+    state: present 
+
+- name: Copying proxy file 
+  ansible.builtin.template:
+    src: proxy.conf
+    dest: /etc/nginx/default.d/expense.conf  
+
+- name: App Prequisite Tasks
+  ansible.builtin.include_role:      # Through this we can all a specific task from a role
+    name: common                     # Name of the role to be called 
+    tasks_from: pre-req              # Name of the task in the above mentioned role 
+
+- name: Restarting {{COMPONENT}}
+  ansible.builtin.systemd_service:
+    name: nginx 
+    state: restarted
+    enabled: true
+    daemon_reload: true
